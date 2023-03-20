@@ -9,7 +9,9 @@ from cloudshell.networking.cisco.iosxr.flows.connectivity import (
     CiscoIOSXRConnectivityFlow,
 )
 from cloudshell.networking.cisco.iosxr.flows.firmware import CiscoIOSXRLoadFirmwareFlow
-from cloudshell.networking.cisco.snmp.cisco_snmp_handler import CiscoSnmpHandler
+from cloudshell.networking.cisco.snmp.cisco_snmp_handler import (
+    CiscoSnmpHandler as SNMPHandler, CiscoEnableDisableSnmpFlow,
+)
 from cloudshell.shell.core.driver_context import (
     AutoLoadCommandContext,
     AutoLoadDetails,
@@ -25,6 +27,7 @@ from cloudshell.shell.standards.networking.autoload_model import NetworkingResou
 from cloudshell.shell.standards.networking.driver_interface import (
     NetworkingResourceDriverInterface,
 )
+
 from cloudshell.shell.standards.networking.resource_config import (
     NetworkingResourceConfig,
 )
@@ -41,8 +44,10 @@ class CiscoIOSXRResourceDriver(
         self._cli = None
 
     def initialize(self, context: InitCommandContext):
+        api = CloudShellSessionContext(context).get_api()
         resource_config = NetworkingResourceConfig.from_context(
-            shell_name=self.SHELL_NAME, supported_os=self.SUPPORTED_OS, context=context
+            context=context,
+            api=api
         )
 
         self._cli = CiscoIOSXRCli(resource_config)
@@ -56,26 +61,23 @@ class CiscoIOSXRResourceDriver(
 
             api = CloudShellSessionContext(context).get_api()
             resource_config = NetworkingResourceConfig.from_context(
-                shell_name=self.SHELL_NAME,
-                supported_os=self.SUPPORTED_OS,
                 context=context,
                 api=api,
             )
 
             cli_handler = self._cli.get_cli_handler(resource_config, logger)
-            snmp_handler = CiscoSnmpHandler(resource_config, logger, cli_handler)
+            enable_disable_flow = CiscoEnableDisableSnmpFlow(cli_handler, logger)
+            snmp_handler = SNMPHandler.from_config(enable_disable_flow, resource_config,
+                                                   logger)
             autoload_operations = CiscoSnmpAutoloadFlow(
                 logger=logger, snmp_handler=snmp_handler
             )
 
-            resource_model = NetworkingResourceModel(
-                resource_config.name,
-                resource_config.shell_name,
-                resource_config.family_name,
+            resource_model = NetworkingResourceModel.from_resource_config(
+                resource_config
             )
-
             response = autoload_operations.discover(
-                resource_config.supported_os, resource_model
+                self.SUPPORTED_OS, resource_model
             )
             logger.info("'Autoload' command completed")
 
@@ -90,8 +92,6 @@ class CiscoIOSXRResourceDriver(
             api = CloudShellSessionContext(context).get_api()
 
             resource_config = NetworkingResourceConfig.from_context(
-                shell_name=self.SHELL_NAME,
-                supported_os=self.SUPPORTED_OS,
                 context=context,
                 api=api,
             )
@@ -118,8 +118,6 @@ class CiscoIOSXRResourceDriver(
             api = CloudShellSessionContext(context).get_api()
 
             resource_config = NetworkingResourceConfig.from_context(
-                shell_name=self.SHELL_NAME,
-                supported_os=self.SUPPORTED_OS,
                 context=context,
                 api=api,
             )
@@ -147,8 +145,6 @@ class CiscoIOSXRResourceDriver(
             api = CloudShellSessionContext(context).get_api()
 
             resource_config = NetworkingResourceConfig.from_context(
-                shell_name=self.SHELL_NAME,
-                supported_os=self.SUPPORTED_OS,
                 context=context,
                 api=api,
             )
@@ -159,7 +155,7 @@ class CiscoIOSXRResourceDriver(
                 cli_handler=cli_handler,
                 support_vlan_range_str=True,
             )
-            result = connectivity_operations.apply_connectivity_changes(request=request)
+            result = connectivity_operations.apply_connectivity(request=request)
 
             logger.info(
                 f"'Apply Connectivity Changes' command completed with result '{result}'"
@@ -179,8 +175,6 @@ class CiscoIOSXRResourceDriver(
             api = CloudShellSessionContext(context).get_api()
 
             resource_config = NetworkingResourceConfig.from_context(
-                shell_name=self.SHELL_NAME,
-                supported_os=self.SUPPORTED_OS,
                 context=context,
                 api=api,
             )
@@ -219,8 +213,6 @@ class CiscoIOSXRResourceDriver(
             api = CloudShellSessionContext(context).get_api()
 
             resource_config = NetworkingResourceConfig.from_context(
-                shell_name=self.SHELL_NAME,
-                supported_os=self.SUPPORTED_OS,
                 context=context,
                 api=api,
             )
@@ -253,8 +245,6 @@ class CiscoIOSXRResourceDriver(
             api = CloudShellSessionContext(context).get_api()
 
             resource_config = NetworkingResourceConfig.from_context(
-                shell_name=self.SHELL_NAME,
-                supported_os=self.SUPPORTED_OS,
                 context=context,
                 api=api,
             )
@@ -288,8 +278,6 @@ class CiscoIOSXRResourceDriver(
             api = CloudShellSessionContext(context).get_api()
 
             resource_config = NetworkingResourceConfig.from_context(
-                shell_name=self.SHELL_NAME,
-                supported_os=self.SUPPORTED_OS,
                 context=context,
                 api=api,
             )
@@ -321,8 +309,6 @@ class CiscoIOSXRResourceDriver(
             api = CloudShellSessionContext(context).get_api()
 
             resource_config = NetworkingResourceConfig.from_context(
-                shell_name=self.SHELL_NAME,
-                supported_os=self.SUPPORTED_OS,
                 context=context,
                 api=api,
             )
@@ -350,8 +336,6 @@ class CiscoIOSXRResourceDriver(
             api = CloudShellSessionContext(context).get_api()
 
             resource_config = NetworkingResourceConfig.from_context(
-                shell_name=self.SHELL_NAME,
-                supported_os=self.SUPPORTED_OS,
                 context=context,
                 api=api,
             )
@@ -379,8 +363,6 @@ class CiscoIOSXRResourceDriver(
             logger.info("Starting 'Shutdown' command ...")
             api = CloudShellSessionContext(context).get_api()
             resource_config = NetworkingResourceConfig.from_context(
-                shell_name=self.SHELL_NAME,
-                supported_os=self.SUPPORTED_OS,
                 context=context,
                 api=api,
             )

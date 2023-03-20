@@ -62,6 +62,6 @@ src/test_iosxr.py
 CiscoIosxrRouter2GenDriver.zip
 *.zip
 /package/.vs/
-
 # Local testing
 src/check_iosxr.py
+/.idea
