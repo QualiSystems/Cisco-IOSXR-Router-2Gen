@@ -65,3 +65,5 @@ CiscoIosxrRouter2GenDriver.zip
 # Local testing
 src/check_iosxr.py
 /.idea
+
+/src/run*
