@@ -8,9 +8,9 @@
 
 ![](https://github.com/QualiSystems/cloudshell-shells-documentaion-templates/blob/master/cloudshell_logo.png)
 
-Release date: June 2017
+Release date: March 2023
 
-Shell version: 1.0.0
+Shell version: 3.0.0
 
 Document version: 2.0
 
@@ -45,7 +45,7 @@ For detailed information about the shell’s structure and attributes, see the [
 
 Release: **Cisco IOS-XR Router 2G Shell**
 
-▪ CloudShell version: 8.0 and above
+▪ CloudShell version: 2021.1 GA and above
 
 ▪ Cisco OS: Cisco IOS-XR
 

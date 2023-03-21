@@ -58,7 +58,7 @@ docs/_build/
 # PyBuilder
 target/
 cloudshell_config.yml
-src/test_iosxr.py
+test_iosxr.py
 CiscoIosxrRouter2GenDriver.zip
 *.zip
 /package/.vs/
