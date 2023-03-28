@@ -47,6 +47,8 @@ Release: **Cisco IOS-XR Router 2G Shell**
 
 ▪ CloudShell version: 2021.1 GA and above
 
+▪ Python Version: 3.7, 3.9
+
 ▪ Cisco OS: Cisco IOS-XR
 
 **Note:** If your CloudShell version does not support this shell, you should consider upgrading to a later version of CloudShell or contact customer support.
@@ -257,11 +259,7 @@ To connect with Quali users and experts from around the world, ask questions and
 
 # Release Notes 
 
-**Cisco IOS-XR Router 2G Shell**
-
+For release updates, see the shell's [GitHub releases page](https://github.com/QualiSystems/Cisco-IOSXR-Router-Shell-2G/releases).
 
 ### Known Issues
-
-* Shell doesn’t support slice architecture of NCS devices.
-* Due to the Physical Entity table design, all ports that are missing a SFP or GBIC transceiver will be skipped during **Autoload**.
 
