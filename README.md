@@ -8,9 +8,9 @@
 
 ![](https://github.com/QualiSystems/cloudshell-shells-documentaion-templates/blob/master/cloudshell_logo.png)
 
-Release date: June 2017
+Release date: March 2023
 
-Shell version: 1.0.0
+Shell version: 3.0.0
 
 Document version: 2.0
 
@@ -45,7 +45,9 @@ For detailed information about the shell’s structure and attributes, see the [
 
 Release: **Cisco IOS-XR Router 2G Shell**
 
-▪ CloudShell version: 8.0 and above
+▪ CloudShell version: 2021.1 GA and above
+
+▪ Python Version: 3.7, 3.9
 
 ▪ Cisco OS: Cisco IOS-XR
 
@@ -241,8 +243,9 @@ The **Startup** or **Running** configuration is saved to a file named *<Resource
 2. Run the **Load Firmware** resource command. 
 
 3. In the command inputs field, enter the following information:
-	* **Remote Host** (Mandatory). Enter the full path to the firmware file on the remote host, for example: *tftp://10.1.1.1/ios12.SE1-smp-k8.bin* 
-	* **File Path** (Mandatory). Enter the destination filename on the device itself, for example: *bootflash:/ios12.SE1-smp-k8.bin*.
+	* **Path** (Mandatory) Enter the full path to the firmware file on the remote host, for example: *tftp://10.1.1.1/ios12.SE1-smp-k8.bin* 
+	* **Features to Install** (Optional) Firmware and/or features names separated by space, i.e. ncs5500-mini-x-6.2.25 ncs5500-isis-2.2.0.0-r6225.x86_64 ncs5500-k9sec-3.2.0.0-r6225.x86_64
+    * **VRF Management Name**: (Optional) Provide the VRF Management name, if relevant.
 	
 4. Click **Run**.
 
@@ -257,11 +260,7 @@ To connect with Quali users and experts from around the world, ask questions and
 
 # Release Notes 
 
-**Cisco IOS-XR Router 2G Shell**
-
+For release updates, see the shell's [GitHub releases page](https://github.com/QualiSystems/Cisco-IOSXR-Router-Shell-2G/releases).
 
 ### Known Issues
-
-* Shell doesn’t support slice architecture of NCS devices.
-* Due to the Physical Entity table design, all ports that are missing a SFP or GBIC transceiver will be skipped during **Autoload**.
 
