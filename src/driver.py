@@ -10,7 +10,10 @@ from cloudshell.networking.cisco.iosxr.flows.connectivity import (
 )
 from cloudshell.networking.cisco.iosxr.flows.firmware import CiscoIOSXRLoadFirmwareFlow
 from cloudshell.networking.cisco.snmp.cisco_snmp_handler import (
-    CiscoSnmpHandler as SNMPHandler, CiscoEnableDisableSnmpFlow,
+    CiscoEnableDisableSnmpFlow,
+)
+from cloudshell.networking.cisco.snmp.cisco_snmp_handler import (
+    CiscoSnmpHandler as SNMPHandler,
 )
 from cloudshell.shell.core.driver_context import (
     AutoLoadCommandContext,
@@ -27,7 +30,6 @@ from cloudshell.shell.standards.networking.autoload_model import NetworkingResou
 from cloudshell.shell.standards.networking.driver_interface import (
     NetworkingResourceDriverInterface,
 )
-
 from cloudshell.shell.standards.networking.resource_config import (
     NetworkingResourceConfig,
 )
@@ -46,8 +48,7 @@ class CiscoIOSXRResourceDriver(
     def initialize(self, context: InitCommandContext):
         api = CloudShellSessionContext(context).get_api()
         resource_config = NetworkingResourceConfig.from_context(
-            context=context,
-            api=api
+            context=context, api=api
         )
 
         self._cli = CiscoIOSXRCli(resource_config)
@@ -67,8 +68,9 @@ class CiscoIOSXRResourceDriver(
 
             cli_handler = self._cli.get_cli_handler(resource_config, logger)
             enable_disable_flow = CiscoEnableDisableSnmpFlow(cli_handler, logger)
-            snmp_handler = SNMPHandler.from_config(enable_disable_flow, resource_config,
-                                                   logger)
+            snmp_handler = SNMPHandler.from_config(
+                enable_disable_flow, resource_config, logger
+            )
             autoload_operations = CiscoSnmpAutoloadFlow(
                 logger=logger, snmp_handler=snmp_handler
             )
@@ -76,9 +78,7 @@ class CiscoIOSXRResourceDriver(
             resource_model = NetworkingResourceModel.from_resource_config(
                 resource_config
             )
-            response = autoload_operations.discover(
-                self.SUPPORTED_OS, resource_model
-            )
+            response = autoload_operations.discover(self.SUPPORTED_OS, resource_model)
             logger.info("'Autoload' command completed")
 
             return response

@@ -1,7 +1,7 @@
 import unittest
+from unittest.mock import patch
 
 from cloudshell.shell.core.driver_context import ResourceCommandContext
-from mock import patch
 
 from src.driver import CiscoIOSXRResourceDriver
 
