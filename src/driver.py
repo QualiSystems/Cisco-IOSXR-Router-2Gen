@@ -1,20 +1,3 @@
-from cloudshell.networking.cisco.flows.cisco_autoload_flow import CiscoSnmpAutoloadFlow
-from cloudshell.networking.cisco.flows.cisco_run_command_flow import CiscoRunCommandFlow
-from cloudshell.networking.cisco.flows.cisco_state_flow import CiscoStateFlow
-from cloudshell.networking.cisco.iosxr.cli.handler import CiscoIOSXRCli
-from cloudshell.networking.cisco.iosxr.flows.configuration import (
-    CiscoIOSXRConfigurationFlow,
-)
-from cloudshell.networking.cisco.iosxr.flows.connectivity import (
-    CiscoIOSXRConnectivityFlow,
-)
-from cloudshell.networking.cisco.iosxr.flows.firmware import CiscoIOSXRLoadFirmwareFlow
-from cloudshell.networking.cisco.snmp.cisco_snmp_handler import (
-    CiscoEnableDisableSnmpFlow,
-)
-from cloudshell.networking.cisco.snmp.cisco_snmp_handler import (
-    CiscoSnmpHandler as SNMPHandler,
-)
 from cloudshell.shell.core.driver_context import (
     AutoLoadCommandContext,
     AutoLoadDetails,
@@ -32,6 +15,24 @@ from cloudshell.shell.standards.networking.driver_interface import (
 )
 from cloudshell.shell.standards.networking.resource_config import (
     NetworkingResourceConfig,
+)
+
+from cloudshell.networking.cisco.flows.cisco_autoload_flow import CiscoSnmpAutoloadFlow
+from cloudshell.networking.cisco.flows.cisco_run_command_flow import CiscoRunCommandFlow
+from cloudshell.networking.cisco.flows.cisco_state_flow import CiscoStateFlow
+from cloudshell.networking.cisco.iosxr.cli.handler import CiscoIOSXRCli
+from cloudshell.networking.cisco.iosxr.flows.configuration import (
+    CiscoIOSXRConfigurationFlow,
+)
+from cloudshell.networking.cisco.iosxr.flows.connectivity import (
+    CiscoIOSXRConnectivityFlow,
+)
+from cloudshell.networking.cisco.iosxr.flows.firmware import CiscoIOSXRLoadFirmwareFlow
+from cloudshell.networking.cisco.snmp.cisco_snmp_handler import (
+    CiscoEnableDisableSnmpFlow,
+)
+from cloudshell.networking.cisco.snmp.cisco_snmp_handler import (
+    CiscoSnmpHandler as SNMPHandler,
 )
 
 
